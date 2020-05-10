@@ -8,6 +8,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter
 import javax.sql.DataSource
 
@@ -29,10 +30,15 @@ class Oauth2AuthorizationConfig(
                 .accessTokenValiditySeconds(30000)
 //        clients.jdbc(dataSource).passwordEncoder(passwordEncoder)
     }
-
+/** jwt Token */
+//    override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
+//        super.configure(endpoints)
+//        endpoints.accessTokenConverter(jwtAccessTokenConverter())
+//    }
+/** jdbc */
     override fun configure(endpoints: AuthorizationServerEndpointsConfigurer) {
-        super.configure(endpoints)
-        endpoints.accessTokenConverter(jwtAccessTokenConverter())
+//        super.configure(endpoints)
+        endpoints.tokenStore(JdbcTokenStore(dataSource))
     }
 
     @Bean

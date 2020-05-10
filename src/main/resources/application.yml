@@ -1,0 +1,27 @@
+server:
+  port: 8081
+spring:
+  h2:
+    console:
+      enabled: true
+  #      settings:
+#        web-allow-others: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+#    password: sa
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties.hibernate.hbm2ddl.auto: update
+    showSql: true
+    database: h2
+security:
+  oauth2:
+    client:
+      client-id: testClientId
+      client-secret: testSecret
+    resource:
+      token-info-uri: http://localhost:8081/oauth/check_token
+    jwt:
+      signKey: 123
